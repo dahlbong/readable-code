@@ -54,7 +54,7 @@ public class Minesweeper {
             return;
         }
 
-        if (doesUserChooseOpenToOpenCell(userActionInput)) {
+        if (doesUserChooseToOpenCell(userActionInput)) {
             if (gameBoard.isLandMineCell(selectedRowIndex, selectedColIndex)) {
                 gameBoard.open(selectedRowIndex, selectedColIndex);
                 changeGameStatusToLose();
@@ -72,14 +72,13 @@ public class Minesweeper {
         gameStatus = -1;
     }
 
-    private boolean doesUserChooseOpenToOpenCell(String userActionInput) {
+    private boolean doesUserChooseToOpenCell(String userActionInput) {
         return userActionInput.equals("1");
     }
 
     private boolean doesUserChooseToPlantFlag(String userActionInput) {
         return userActionInput.equals("2");
     }
-
 
     private String getUserActionInputFromUser() {
         consoleOutputHandler.printCommentForUserAction();
