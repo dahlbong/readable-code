@@ -1,8 +1,8 @@
 package cleancode.minesweeper.tobe;
 
-public class AppException extends RuntimeException{
+public class GameException extends RuntimeException{
 
-    public AppException(String message) {
+    public GameException(String message) {
         super(message);
     }
 }
