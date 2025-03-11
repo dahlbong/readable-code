@@ -12,7 +12,7 @@ public class CellState {
 
     public static CellState initialize() {
         return new CellState(false, false);
-        }
+    }
 
     public void flag() {
         this.isFlagged = true;
