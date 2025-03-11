@@ -1,4 +1,4 @@
-package cleancode.minesweeper.tobe;
+package cleancode.minesweeper.tobe.minesweeper;
 
 import cleancode.minesweeper.tobe.minesweeper.board.GameBoard;
 import cleancode.minesweeper.tobe.minesweeper.config.GameConfig;
