@@ -3,13 +3,10 @@ package cleancode.studycafe.selfRefactoring;
 import cleancode.studycafe.selfRefactoring.exception.AppException;
 import cleancode.studycafe.selfRefactoring.io.InputHandler;
 import cleancode.studycafe.selfRefactoring.io.OutputHandler;
-import cleancode.studycafe.selfRefactoring.io.StudyCafeFileHandler;
 import cleancode.studycafe.selfRefactoring.model.StudyCafeLockerPass;
 import cleancode.studycafe.selfRefactoring.model.StudyCafePass;
 import cleancode.studycafe.selfRefactoring.model.StudyCafePassType;
 import cleancode.studycafe.selfRefactoring.pass.PassHandler;
-
-import java.util.List;
 
 public class StudyCafePassMachine {
 
