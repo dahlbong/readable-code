@@ -1,29 +1,29 @@
 package cleancode.studycafe.selfRefactoring.pass;
 
+import cleancode.studycafe.selfRefactoring.io.StudyCafeData;
 import cleancode.studycafe.selfRefactoring.io.InputHandler;
 import cleancode.studycafe.selfRefactoring.io.OutputHandler;
-import cleancode.studycafe.selfRefactoring.io.StudyCafeFileHandler;
 import cleancode.studycafe.selfRefactoring.model.StudyCafeLockerPass;
 import cleancode.studycafe.selfRefactoring.model.StudyCafePass;
 import cleancode.studycafe.selfRefactoring.model.StudyCafePassType;
-import cleancode.studycafe.tobe.exception.AppException;
+import cleancode.studycafe.selfRefactoring.exception.AppException;
 
 import java.util.List;
 
 public class PassHandler {
+    private final StudyCafeData PASS_DATA;
 
-    private final StudyCafeFileHandler STUDY_CAFE_FILE_HANDLER = new StudyCafeFileHandler();
+    private PassHandler(StudyCafeData passData) {
+        this.PASS_DATA = passData;
+    }
 
-    public List<StudyCafePass> getPassesByPassType(StudyCafePassType passType) {
-        List<StudyCafePass> studyCafePasses = STUDY_CAFE_FILE_HANDLER.readStudyCafePasses();
-        return studyCafePasses.stream()
-            .filter(pass -> pass.getPassType() == passType)
-            .toList();
+    public static PassHandler of(StudyCafeData passData) {
+        return new PassHandler(passData);
     }
 
     public StudyCafePass selectPass(StudyCafePassType passType, InputHandler inputHandler, OutputHandler outputHandler) {
-        StudyCafePasses passes = new StudyCafePasses(STUDY_CAFE_FILE_HANDLER.readStudyCafePasses());
-        List<StudyCafePass> availablePasses = passes.of(passType);
+        StudyCafePasses passes = StudyCafePasses.of(PASS_DATA.getAllPasses());
+        List<StudyCafePass> availablePasses = passes.filterByPassType(passType);
 
         if (availablePasses.isEmpty()) {
             throw new AppException("해당 이용권을 찾을 수 없습니다.");
@@ -38,8 +38,8 @@ public class PassHandler {
             return null;
         }
 
-        StudyCafeLockerPasses lockerPasses = new StudyCafeLockerPasses(STUDY_CAFE_FILE_HANDLER.readLockerPasses());
-        StudyCafeLockerPass availableLockerPass = lockerPasses.of(selectedPass);
+        StudyCafeLockerPasses lockerPasses = StudyCafeLockerPasses.of(PASS_DATA.getAllLockerPasses());
+        StudyCafeLockerPass availableLockerPass = lockerPasses.findMatchingLockerFor(selectedPass);
 
         if (availableLockerPass == null) {
             return null;

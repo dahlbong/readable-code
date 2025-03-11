@@ -9,11 +9,15 @@ import java.util.stream.Collectors;
 public class StudyCafePasses {
     private final List<StudyCafePass> passes;
 
-    public StudyCafePasses(List<StudyCafePass> passes) {
+    private StudyCafePasses(List<StudyCafePass> passes) {
         this.passes = passes;
     }
 
-    public List<StudyCafePass> of(StudyCafePassType passType) {
+    public static StudyCafePasses of(List<StudyCafePass> passes) {
+        return new StudyCafePasses(passes);
+    }
+
+    public List<StudyCafePass> filterByPassType(StudyCafePassType passType) {
         return passes.stream()
             .filter(pass -> pass.getPassType() == passType)
             .collect(Collectors.toList());

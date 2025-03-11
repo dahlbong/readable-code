@@ -3,6 +3,7 @@ package cleancode.studycafe.selfRefactoring;
 import cleancode.studycafe.selfRefactoring.exception.AppException;
 import cleancode.studycafe.selfRefactoring.io.InputHandler;
 import cleancode.studycafe.selfRefactoring.io.OutputHandler;
+import cleancode.studycafe.selfRefactoring.io.StudyCafeData;
 import cleancode.studycafe.selfRefactoring.model.StudyCafeLockerPass;
 import cleancode.studycafe.selfRefactoring.model.StudyCafePass;
 import cleancode.studycafe.selfRefactoring.model.StudyCafePassType;
@@ -10,21 +11,29 @@ import cleancode.studycafe.selfRefactoring.pass.PassHandler;
 
 public class StudyCafePassMachine {
 
-    private final InputHandler inputHandler = new InputHandler();
-    private final OutputHandler outputHandler = new OutputHandler();
-    private final PassHandler PASS_HANDLER = new PassHandler();
+    private final InputHandler inputHandler;
+    private final OutputHandler outputHandler;
+    private final PassHandler passHandler;
 
+    private StudyCafePassMachine(InputHandler inputHandler, OutputHandler outputHandler, StudyCafeData passData) {
+        this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
+        this.passHandler = PassHandler.of(passData);
+    }
+
+    public static StudyCafePassMachine of(InputHandler inputHandler, OutputHandler outputHandler, StudyCafeData passData) {
+        return new StudyCafePassMachine(inputHandler, outputHandler, passData);
+    }
 
     public void run() {
         try {
             showInitialMessage();
 
             StudyCafePassType studyCafePassType = getPassTypeFromUser();
-            StudyCafePass selectedPass = PASS_HANDLER.selectPass(studyCafePassType, inputHandler, outputHandler);
-            StudyCafeLockerPass lockerPass = PASS_HANDLER.selectLockerPass(selectedPass, inputHandler, outputHandler);
+            StudyCafePass selectedPass = passHandler.selectPass(studyCafePassType, inputHandler, outputHandler);
+            StudyCafeLockerPass lockerPass = passHandler.selectLockerPass(selectedPass, inputHandler, outputHandler);
 
             outputHandler.showPassOrderSummary(selectedPass, lockerPass);
-
         } catch (AppException e) {
             outputHandler.showSimpleMessage(e.getMessage());
         } catch (Exception e) {

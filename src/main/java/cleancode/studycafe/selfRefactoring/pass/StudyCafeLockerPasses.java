@@ -8,12 +8,16 @@ import java.util.List;
 public class StudyCafeLockerPasses {
     private final List<StudyCafeLockerPass> lockerPasses;
 
-    public StudyCafeLockerPasses(List<StudyCafeLockerPass> lockerPasses) {
+    private StudyCafeLockerPasses(List<StudyCafeLockerPass> lockerPasses) {
         this.lockerPasses = lockerPasses;
     }
 
+    public static StudyCafeLockerPasses of(List<StudyCafeLockerPass> lockerPasses) {
+        return new StudyCafeLockerPasses(lockerPasses);
+    }
 
-    public StudyCafeLockerPass of(StudyCafePass selectedPass) {
+
+    public StudyCafeLockerPass findMatchingLockerFor(StudyCafePass selectedPass) {
         return lockerPasses.stream()
             .filter(locker -> locker.getPassType() == selectedPass.getPassType() &&
                 locker.getDuration() == selectedPass.getDuration())
