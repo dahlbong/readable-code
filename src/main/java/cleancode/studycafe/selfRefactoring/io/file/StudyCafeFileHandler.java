@@ -1,4 +1,4 @@
-package cleancode.studycafe.selfRefactoring.io;
+package cleancode.studycafe.selfRefactoring.io.file;
 
 import cleancode.studycafe.selfRefactoring.model.StudyCafeLockerPass;
 import cleancode.studycafe.selfRefactoring.model.StudyCafePass;

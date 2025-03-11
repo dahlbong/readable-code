@@ -1,23 +1,24 @@
 package cleancode.studycafe.selfRefactoring.pass;
 
-import cleancode.studycafe.selfRefactoring.io.StudyCafeData;
 import cleancode.studycafe.selfRefactoring.io.InputHandler;
 import cleancode.studycafe.selfRefactoring.io.OutputHandler;
 import cleancode.studycafe.selfRefactoring.model.StudyCafeLockerPass;
 import cleancode.studycafe.selfRefactoring.model.StudyCafePass;
 import cleancode.studycafe.selfRefactoring.model.StudyCafePassType;
 import cleancode.studycafe.selfRefactoring.exception.AppException;
+import cleancode.studycafe.selfRefactoring.pass.collection.StudyCafeLockerPasses;
+import cleancode.studycafe.selfRefactoring.pass.collection.StudyCafePasses;
 
 import java.util.List;
 
 public class PassHandler {
-    private final StudyCafeData PASS_DATA;
+    private final PassFinder PASS_DATA;
 
-    private PassHandler(StudyCafeData passData) {
+    private PassHandler(PassFinder passData) {
         this.PASS_DATA = passData;
     }
 
-    public static PassHandler of(StudyCafeData passData) {
+    public static PassHandler of(PassFinder passData) {
         return new PassHandler(passData);
     }
 

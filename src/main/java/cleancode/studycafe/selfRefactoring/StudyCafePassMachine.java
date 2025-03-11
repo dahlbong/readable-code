@@ -3,7 +3,7 @@ package cleancode.studycafe.selfRefactoring;
 import cleancode.studycafe.selfRefactoring.exception.AppException;
 import cleancode.studycafe.selfRefactoring.io.InputHandler;
 import cleancode.studycafe.selfRefactoring.io.OutputHandler;
-import cleancode.studycafe.selfRefactoring.io.StudyCafeData;
+import cleancode.studycafe.selfRefactoring.pass.PassFinder;
 import cleancode.studycafe.selfRefactoring.model.StudyCafeLockerPass;
 import cleancode.studycafe.selfRefactoring.model.StudyCafePass;
 import cleancode.studycafe.selfRefactoring.model.StudyCafePassType;
@@ -15,13 +15,13 @@ public class StudyCafePassMachine {
     private final OutputHandler outputHandler;
     private final PassHandler passHandler;
 
-    private StudyCafePassMachine(InputHandler inputHandler, OutputHandler outputHandler, StudyCafeData passData) {
+    private StudyCafePassMachine(InputHandler inputHandler, OutputHandler outputHandler, PassFinder passData) {
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
         this.passHandler = PassHandler.of(passData);
     }
 
-    public static StudyCafePassMachine of(InputHandler inputHandler, OutputHandler outputHandler, StudyCafeData passData) {
+    public static StudyCafePassMachine of(InputHandler inputHandler, OutputHandler outputHandler, PassFinder passData) {
         return new StudyCafePassMachine(inputHandler, outputHandler, passData);
     }
 
