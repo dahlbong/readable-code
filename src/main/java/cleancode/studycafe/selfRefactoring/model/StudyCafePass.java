@@ -47,4 +47,7 @@ public class StudyCafePass {
         return "";
     }
 
+    public boolean ifPassTypeFixed() {
+        return passType == StudyCafePassType.FIXED;
+    }
 }
